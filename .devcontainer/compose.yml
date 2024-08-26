@@ -1,0 +1,14 @@
+services:
+  dev-env:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ../:/workspace:cached
+    depends_on:
+      - redis
+  
+  redis:
+    image: redis:latest
+    ports:
+      - "6380:6379"
