@@ -1,7 +1,6 @@
 from config.redis_conect import get_redis_connection
 
 
-# Conectando ao Redis
 redis_connect = get_redis_connection()
 
 
@@ -17,14 +16,8 @@ def lrange_values(lista, inicio, fim):
     Returns:
         list: Uma lista de valores do intervalo especificado.
     
-    Exemplo:
-        >>> lrange_values("minha_lista", 0, 2)
-        ['valor1', 'valor2', 'valor3']
+    Equivalencia ao Redis CLI: LRANGE <lista> <inicio> <fim>
+    Exemplo: LRANGE minha_lista 0 2
     """
     valores = redis_connect.lrange(lista, inicio, fim)
     return [v.decode('utf-8') for v in valores]
-
-'''
-Equivalente no cli: LRANGE <lista> <inicio> <fim>
-Exemplo: LRANGE minha_lista 0 2
-'''

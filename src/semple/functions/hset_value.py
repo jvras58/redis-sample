@@ -1,7 +1,6 @@
 import streamlit as st
 from config.redis_conect import get_redis_connection
 
-# Conectando ao Redis
 redis_connect = get_redis_connection()
 
 
@@ -14,16 +13,8 @@ def hset_value(hashname, campo, valor):
     - campo (str): O nome do campo.
     - valor (str): O valor a ser definido.
 
-
-    Example:
-    >>> hset_value("meu_hash", "campo1", "valor1")
-    >>> hset_value("meu_hash", "campo2", "valor2")
-
+    Equivalencia ao Redis CLI:  HSET <hashname> <campo> <valor>
+    Exemplo: HSET meu_hash campo1 valor1
     """
     redis_connect.hset(hashname, campo, valor)
     st.success(f"Campo '{campo}' no hash '{hashname}' definido com valor '{valor}'.")
-
-'''
-Equivalente no cli: HSET <hashname> <campo> <valor>
-Exemplo: HSET meu_hash campo1 valor1
-'''

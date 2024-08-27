@@ -14,16 +14,9 @@ def hgetall_values(hashname):
 
     Returns:
     - dict: Um dicionário contendo os valores do hash Redis, com chaves e valores como strings.
-
-    Example:
-    >>> hgetall_values("myhash")
-    {'key1': 'value1', 'key2': 'value2', 'key3': 'value3'}
+    
+    Equivalencia ao Redis CLI: HGETALL <hashname>
+    Exemplo: HGETALL myhash
     """
     valores = redis_connect.hgetall(hashname)
     return {k.decode('utf-8'): v.decode('utf-8') for k, v in valores.items()}
-
-
-'''
-Equivalente no cli: HGETALL <hashname>
-Exemplo: HGETALL myhash
-'''

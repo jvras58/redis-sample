@@ -1,23 +1,11 @@
 import streamlit as st
-from config.redis_conect import check_redis_connection, get_redis_connection
+from config.decode import decode_redis_data
+from config.redis_conect import check_redis_connection
 from quiz.functions import (
     add_question, delete_all_questions, delete_all_users, get_random_question, 
     get_ranking, list_all_questions, register_user, submit_answer
 )
 
-def decode_redis_data(data):
-    """
-    Converta todas as strings de bytes no dicionário de dados fornecido em strings regulares.
-    """
-    if isinstance(data, dict):
-        return {k.decode('utf-8') if isinstance(k, bytes) else k: 
-                v.decode('utf-8') if isinstance(v, bytes) else v for k, v in data.items()}
-    elif isinstance(data, list):
-        return [decode_redis_data(item) for item in data]
-    return data
-
-# Conexão com Redis
-redis_client = get_redis_connection()
 
 # Verificação de Conexão com Redis
 if check_redis_connection():
@@ -25,22 +13,20 @@ if check_redis_connection():
 else:
     st.sidebar.error("Erro ao conectar ao Redis. Verifique a conexão.")
 
-# Título da aplicação
+
 st.title("🎉 Quiz Redis 🎉")
 
-# Registro de usuário
 if "user_id" not in st.session_state:
     st.header("📝 Registre-se para começar o Quiz")
     username = st.text_input("Digite seu nome de usuário:")
     if st.button("Registrar"):
         if username:
             st.session_state["user_id"] = register_user(username)
-            st.session_state["question_answered"] = False  # Initialize question state
+            st.session_state["question_answered"] = False
             st.success(f"Bem-vindo(a), {username}!")
         else:
             st.error("Por favor, digite um nome de usuário válido.")
 else:
-    # Mostrar pergunta
     st.header("🤔 Responda à pergunta:")
     question, correct_answer = get_random_question()
 
@@ -64,7 +50,6 @@ else:
     else:
         st.write("Nenhuma pergunta disponível. Por favor, adicione perguntas no painel de administração.")
 
-    # Exibir ranking
     st.header("🏆 Ranking")
     ranking = get_ranking()
 
@@ -81,7 +66,6 @@ else:
     else:
         st.write("O ranking ainda está vazio. Seja o primeiro a jogar!")
 
-# Painel de Administração
 st.sidebar.header("⚙️ Administração")
 if st.sidebar.checkbox("Mostrar opções de administração"):
     st.sidebar.subheader("Adicionar nova pergunta")
@@ -103,7 +87,6 @@ if st.sidebar.checkbox("Mostrar opções de administração"):
         else:
             st.sidebar.error("Por favor, digite um nome de usuário válido.")
     
-    # Listar todas as perguntas disponíveis
     st.sidebar.subheader("Perguntas Disponíveis")
     questions = list_all_questions()
     if questions:
