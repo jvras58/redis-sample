@@ -18,8 +18,11 @@ update:
     @git pull
     @$(MAKE) venv
 
-run:
-    export PYTHONPATH=src && streamlit run semple/playground.py
+playground:
+    export PYTHONPATH=src && streamlit run src/semple/playground.py
 
-api:
-    export PYTHONPATH=src && streamlit run src/api/app.py
+quiz:
+    export PYTHONPATH=src && streamlit run src/quiz/quizz.py
+
+login:
+    export PYTHONPATH=src && streamlit run src/login/login.py

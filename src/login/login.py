@@ -1,7 +1,7 @@
 
 import streamlit as st
 
-from api.functions import create_session, end_session, get_active_users, list_active_sessions
+from functions import create_session, end_session, get_active_users, list_active_sessions
 
 
 st.title("Sistema de Sessões com Redis")

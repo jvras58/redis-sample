@@ -42,11 +42,22 @@ Essas e outras libs e tecnologias usadas neste projeto são:
 │   ...
 │ 
 ├─📁 src               ->  [Implementação da API] 
-│   ├── 📁 api
-│   │      ├─🐍 app.py         ->  Entrypoint da aplicação
+│   ├── 📁 login
+│   │      ├─🐍 login.py         ->  exemplo de login com redis e streamlit
+│   │      ├─🐍 functions.py     ->  funções de uso para o login
+│   │       ...
+│   ├── 📁 quiz
+│   │      ├─🐍 quizz.py         ->  exemplo de quiz com redis e streamlit
+│   │      ├─🐍 functions.py     ->  funções de uso para do quiz
+│   │       ...
+│   ├── 📁 semple
+│   │      ├─🐍 playground.py       -> Implementação simples é pura para demonstração
+│   │   ├── 📁 functions            -> functions para o playground
+│   │      ├─🐍 get.py              -> Função para obter o valor de uma chave no Redis
+│   │       ...
+│   │   ├── 📁 tests                -> testes para o playground
 │   │       ...
 │   ...
-├─📄 .env_sample       ->  Exemplo de .env
 ├─📄 .gitignore
 ├─📄 Makefile          ->  Automações para o ambiente
 ├─📄 pyproject.toml    ->  Definições para o projeto
