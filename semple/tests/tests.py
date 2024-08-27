@@ -32,24 +32,41 @@ def test_incr_value():
 
 def test_lpush_value():
     try:
+
+        redis_connect.delete('mylist')
+        
         redis_connect.lpush('mylist', 'valor1')
         redis_connect.lpush('mylist', 'valor2')
         lista = redis_connect.lrange('mylist', 0, -1)
-        assert lista == [b'valor2', b'valor1']  # 'valor2' vem antes de 'valor1'
-        return "✅ Teste de LPUSH passou!"
-    except AssertionError:
-        return "❌ Teste de LPUSH falhou!"
 
+        assert lista == [b'valor2', b'valor1'], f"Esperado [b'valor2', b'valor1'], mas obteve {lista}"
+
+        return "✅ Teste de LPUSH passou!"
+    except AssertionError as e:
+        return f"❌ Teste de LPUSH falhou! {e}"
 
 def test_lrange_values():
     try:
+
+        redis_connect.delete('mylist')
+        
         redis_connect.lpush('mylist', 'valor1')
         redis_connect.lpush('mylist', 'valor2')
+
         valores = redis_connect.lrange('mylist', 0, -1)
-        assert [v.decode('utf-8') for v in valores] == ['valor2', 'valor1']  # Verificando a ordem correta
+        assert [v.decode('utf-8') for v in valores] == ['valor2', 'valor1'], (
+            f"Esperado ['valor2', 'valor1'], mas obteve {[v.decode('utf-8') for v in valores]}"
+        )
+
+        valores = redis_connect.lrange('mylist', 0, 0)
+        assert [v.decode('utf-8') for v in valores] == ['valor2'], (
+            f"Esperado ['valor2'], mas obteve {[v.decode('utf-8') for v in valores]}"
+        )
+
         return "✅ Teste de LRANGE passou!"
-    except AssertionError:
-        return "❌ Teste de LRANGE falhou!"
+    except AssertionError as e:
+        return f"❌ Teste de LRANGE falhou! {e}"
+
 
 
 def test_hset_value():
