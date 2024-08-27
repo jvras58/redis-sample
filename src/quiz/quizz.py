@@ -5,6 +5,23 @@ from quiz.functions import (
     get_ranking, list_all_questions, register_user, submit_answer
 )
 
+def decode_redis_data(data):
+    """
+    Convert all byte strings in the given data dictionary to regular strings.
+
+    Parameters:
+        data (dict or list): Dictionary or list with byte strings as keys or values.
+
+    Returns:
+        dict or list: A new dictionary or list with all byte strings converted to strings.
+    """
+    if isinstance(data, dict):
+        return {k.decode('utf-8') if isinstance(k, bytes) else k: 
+                v.decode('utf-8') if isinstance(v, bytes) else v for k, v in data.items()}
+    elif isinstance(data, list):
+        return [decode_redis_data(item) for item in data]
+    return data
+
 # Conexão com Redis
 redis_client = get_redis_connection()
 
@@ -15,7 +32,7 @@ else:
     st.sidebar.error("Erro ao conectar ao Redis. Verifique a conexão.")
 
 # Título da aplicação
-st.title("🎉 Quiz com Redis 🎉")
+st.title("🎉 Quiz Redis 🎉")
 
 # Registro de usuário
 if "user_id" not in st.session_state:
@@ -24,9 +41,10 @@ if "user_id" not in st.session_state:
     if st.button("Registrar"):
         if username:
             st.session_state["user_id"] = register_user(username)
+            st.session_state["question_answered"] = False  # Initialize question state
             st.success(f"Bem-vindo(a), {username}!")
-            # Rerun simulation by setting a state variable
-            st.session_state["registered"] = True
+        else:
+            st.error("Por favor, digite um nome de usuário válido.")
 else:
     # Mostrar pergunta
     st.header("🤔 Responda à pergunta:")
@@ -38,22 +56,36 @@ else:
 
         if st.button("Enviar Resposta"):
             submit_answer(st.session_state["user_id"], answer, correct_answer)
+            st.session_state["question_answered"] = True  # Update question state
+            
             if answer.lower() == correct_answer.lower():
                 st.success("✔️ Resposta correta!")
             else:
                 st.error(f"❌ Resposta errada! A resposta correta era: {correct_answer}")
 
-            if st.button("Próxima Pergunta"):
-                st.session_state["next_question"] = True
+    if "question_answered" in st.session_state and st.session_state["question_answered"]:
+        if st.button("Próxima Pergunta"):
+            st.session_state["question_answered"] = False  # Reset for next question
+
     else:
         st.write("Nenhuma pergunta disponível. Por favor, adicione perguntas no painel de administração.")
 
     # Exibir ranking
     st.header("🏆 Ranking")
     ranking = get_ranking()
+
+    # Decode bytes to strings if necessary
+    ranking = decode_redis_data(ranking)
+    
     if ranking:
         for idx, user in enumerate(ranking, 1):
-            st.write(f"{idx}. {user['username']} - {user['score']} pontos")
+            # Check if 'username' key exists and handle missing keys
+            if 'username' in user:
+                username = user['username']
+                score = user['score']
+                st.write(f"{idx}. {username} - {score} pontos")
+            else:
+                st.write(f"{idx}. Entrada sem nome de usuário - {user.get('score', '0')} pontos")
     else:
         st.write("O ranking ainda está vazio. Seja o primeiro a jogar!")
 
