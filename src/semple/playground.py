@@ -27,13 +27,36 @@ opcao = st.sidebar.selectbox(
 
 if opcao == "Testes":
     st.subheader("Testes Automáticos")
-    st.write(test_set_value())
-    st.write(test_get_value())
-    st.write(test_incr_value())
-    st.write(test_lpush_value())
-    st.write(test_lrange_values())
-    st.write(test_hset_value())
-    st.write(test_hgetall_values())
+
+    # Inicializa a barra de progresso
+    progresso = st.progress(0)
+    status_text = st.empty()  # Espaço para atualizar o texto de status
+    
+    # Lista de testes para execução
+    testes = [
+        ("Testando SET", test_set_value),
+        ("Testando GET", test_get_value),
+        ("Testando INCR", test_incr_value),
+        ("Testando LPUSH", test_lpush_value),
+        ("Testando LRANGE", test_lrange_values),
+        ("Testando HSET", test_hset_value),
+        ("Testando HGETALL", test_hgetall_values)
+    ]
+    
+    for i, (descricao, func_teste) in enumerate(testes):
+        status_text.text(f"Executando: {descricao}")
+        resultado = func_teste()
+        
+        # Mostra o resultado de cada teste
+        if resultado:
+            st.success(f"{descricao} - Sucesso!")
+        else:
+            st.error(f"{descricao} - Falhou!")
+        
+        # Atualiza a barra de progresso
+        progresso.progress((i + 1) / len(testes))
+    
+    status_text.text("Testes completos!")
 
 elif opcao == "SET":
     st.subheader("Definir um par chave-valor")
@@ -41,6 +64,7 @@ elif opcao == "SET":
     valor = st.text_input("Valor", value="meu_valor")
     if st.button("Definir"):
         set_value(chave, valor)
+        st.success(f"Chave '{chave}' definida com sucesso!")
 
 elif opcao == "GET":
     st.subheader("Recuperar o valor de uma chave")
@@ -57,6 +81,7 @@ elif opcao == "INCR":
     chave = st.text_input("Chave", value="meu_contador")
     if st.button("Incrementar"):
         incr_value(chave)
+        st.success(f"Chave '{chave}' incrementada com sucesso!")
 
 elif opcao == "LPUSH":
     st.subheader("Adicionar um valor ao início de uma lista")
@@ -64,6 +89,7 @@ elif opcao == "LPUSH":
     valor = st.text_input("Valor", value="meu_valor")
     if st.button("Adicionar"):
         lpush_value(lista, valor)
+        st.success(f"Valor '{valor}' adicionado à lista '{lista}' com sucesso!")
 
 elif opcao == "LRANGE":
     st.subheader("Recuperar elementos de uma lista")
@@ -71,7 +97,6 @@ elif opcao == "LRANGE":
     inicio = st.number_input("Início", min_value=0, step=1, value=0)
     fim = st.number_input("Fim", min_value=0, step=1, value=0)
     if st.button("Recuperar"):
-        # Permite -1 para indicar todos os elementos
         if fim == 0 and st.checkbox("Recuperar até o fim da lista"):
             fim = -1
         valores = lrange_values(lista, int(inicio), fim)
@@ -84,6 +109,7 @@ elif opcao == "HSET":
     valor = st.text_input("Valor", value="meu_valor")
     if st.button("Definir"):
         hset_value(hashname, campo, valor)
+        st.success(f"Campo '{campo}' no hash '{hashname}' definido com sucesso!")
 
 elif opcao == "HGETALL":
     st.subheader("Recuperar todos os campos e valores de um hash")
