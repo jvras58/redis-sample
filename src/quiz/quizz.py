@@ -15,7 +15,7 @@ else:
     st.sidebar.error("Erro ao conectar ao Redis. Verifique a conexão.")
 
 # Título da aplicação
-st.title("🎉 Quiz Redis 🎉")
+st.title("🎉 Quiz com Redis 🎉")
 
 # Registro de usuário
 if "user_id" not in st.session_state:
@@ -25,9 +25,8 @@ if "user_id" not in st.session_state:
         if username:
             st.session_state["user_id"] = register_user(username)
             st.success(f"Bem-vindo(a), {username}!")
-            st.experimental_rerun()
-        else:
-            st.error("Por favor, digite um nome de usuário válido.")
+            # Rerun simulation by setting a state variable
+            st.session_state["registered"] = True
 else:
     # Mostrar pergunta
     st.header("🤔 Responda à pergunta:")
@@ -45,7 +44,7 @@ else:
                 st.error(f"❌ Resposta errada! A resposta correta era: {correct_answer}")
 
             if st.button("Próxima Pergunta"):
-                st.experimental_rerun()
+                st.session_state["next_question"] = True
     else:
         st.write("Nenhuma pergunta disponível. Por favor, adicione perguntas no painel de administração.")
 
