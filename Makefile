@@ -20,3 +20,6 @@ update:
 
 run:
     export PYTHONPATH=src && streamlit run semple/playground.py
+
+api:
+    export PYTHONPATH=src && streamlit run src/api/app.py
