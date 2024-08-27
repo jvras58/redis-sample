@@ -19,4 +19,4 @@ update:
     @$(MAKE) venv
 
 run:
-    export PYTHONPATH=src && poetry run python src/semple/redis_raw.py
+    export PYTHONPATH=src && streamlit run semple/playground.py
