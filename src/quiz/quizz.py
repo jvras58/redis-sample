@@ -7,13 +7,7 @@ from quiz.functions import (
 
 def decode_redis_data(data):
     """
-    Convert all byte strings in the given data dictionary to regular strings.
-
-    Parameters:
-        data (dict or list): Dictionary or list with byte strings as keys or values.
-
-    Returns:
-        dict or list: A new dictionary or list with all byte strings converted to strings.
+    Converta todas as strings de bytes no dicionário de dados fornecido em strings regulares.
     """
     if isinstance(data, dict):
         return {k.decode('utf-8') if isinstance(k, bytes) else k: 
@@ -56,7 +50,7 @@ else:
 
         if st.button("Enviar Resposta"):
             submit_answer(st.session_state["user_id"], answer, correct_answer)
-            st.session_state["question_answered"] = True  # Update question state
+            st.session_state["question_answered"] = True
             
             if answer.lower() == correct_answer.lower():
                 st.success("✔️ Resposta correta!")
@@ -65,7 +59,7 @@ else:
 
     if "question_answered" in st.session_state and st.session_state["question_answered"]:
         if st.button("Próxima Pergunta"):
-            st.session_state["question_answered"] = False  # Reset for next question
+            st.session_state["question_answered"] = False
 
     else:
         st.write("Nenhuma pergunta disponível. Por favor, adicione perguntas no painel de administração.")
@@ -74,12 +68,10 @@ else:
     st.header("🏆 Ranking")
     ranking = get_ranking()
 
-    # Decode bytes to strings if necessary
     ranking = decode_redis_data(ranking)
     
     if ranking:
         for idx, user in enumerate(ranking, 1):
-            # Check if 'username' key exists and handle missing keys
             if 'username' in user:
                 username = user['username']
                 score = user['score']
