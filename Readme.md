@@ -10,7 +10,7 @@
 
 ## 📖 Sobre o Projeto
 
-Este projeto é um exemplo desenvolvido para o I Workshop de Engenharia de Dados do CIn-UFPE. Ele visa demonstrar a integração do Redis com aplicações Python, utilizando a biblioteca `redis-py`. Para mais detalhes, consulte o documento [Banco de Dados Orientados à Chave-Valor com Redis](docs/Banco_de_Dados_orientados_à_Chave_Valor_com_Redis.pdf).
+Este projeto é um exemplo desenvolvido para o I Workshop de Engenharia de Dados do CIn-UFPE. Ele visa demonstrar a integração do Redis com aplicações Python, utilizando a biblioteca `redis-py`. Nosso Slide de Apresentação: [Banco de Dados Orientados à Chave-Valor com Redis](docs/Banco_de_Dados_orientados_à_Chave_Valor_com_Redis.pdf).
 
 ## 🚀 Tecnologias e Ferramentas
 
@@ -37,10 +37,6 @@ Essas e outras libs e tecnologias usadas neste projeto são:
 ├─📁 .devcontainer     ->  Configurações do devcontainer
 ├─📁 .vscode           ->  Definições de ambiente para o VSCode
 ├─📁 docs              ->  Artefatos para documentação do repo
-├─📁 semple               ->  Implementação simples é pura para demonstração 
-│   ├─🐍 redis_raw.py.py         ->  Entrypoint do exemplo
-│   ...
-│ 
 ├─📁 src               ->  [Implementação da API] 
 │   ├── 📁 login
 │   │      ├─🐍 login.py         ->  exemplo de login com redis e streamlit

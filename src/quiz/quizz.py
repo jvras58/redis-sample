@@ -1,17 +1,9 @@
 import streamlit as st
 from config.decode import decode_redis_data
-from config.redis_conect import check_redis_connection
 from quiz.functions import (
     add_question, delete_all_questions, delete_all_users, get_random_question, 
     get_ranking, list_all_questions, register_user, submit_answer
 )
-
-
-# Verificação de Conexão com Redis
-if check_redis_connection():
-    st.sidebar.success("Conexão com Redis bem-sucedida!")
-else:
-    st.sidebar.error("Erro ao conectar ao Redis. Verifique a conexão.")
 
 
 st.title("🎉 Quiz Redis 🎉")

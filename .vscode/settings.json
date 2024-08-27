@@ -1,23 +1,21 @@
 {
-    "editor.defaultFormatter": "charliermarsh.ruff",
+    "editor.defaultFormatter": "GitHub.copilot",
     "editor.fontLigatures": true,
-    "editor.padding.top":15,
+    "editor.padding.top": 15,
     "editor.minimap.enabled": false,
     "editor.rulers": [
         88, 120
     ],
     "editor.formatOnSaveMode": "modifications",
     "editor.formatOnSave": true,
-    "isort.importStrategy": "fromEnvironment",
-    "ruff.lint.run": "onSave",
-    "files.insertFinalNewline": true,
-    "files.trimFinalNewlines": true,
     "editor.suggest.insertMode": "replace",
     "editor.codeActionsOnSave": {
         "source.fixAll": "always",
-        "source.organizeImports": "always",
+        "source.organizeImports": "always"
     },
     "editor.foldingImportsByDefault": true,
+    "files.insertFinalNewline": true,
+    "files.trimFinalNewlines": true,
     "files.exclude": {
         "**/__pycache__": true,
         "**/.cache": true,
@@ -36,6 +34,6 @@
     "python.testing.unittestEnabled": false,
     "python.testing.pytestEnabled": true,
     "python.analysis.diagnosticSeverityOverrides": {
-            "reportInvalidTypeForm": false
-        }
+        "reportInvalidTypeForm": false
+    }
 }
