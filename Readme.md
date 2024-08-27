@@ -1,8 +1,8 @@
 
 # Redis Exemplo Pratico
 
-<div align="center">
-  <img src="https://portal.cin.ufpe.br/wp-content/uploads/2024/02/cropped-selo_oficial_4-2.png" alt="Logo CIN" width="120px" height="120px"/>
+<div align="center" style="background-color: white; padding: 10px;">
+  <img src="https://portal.cin.ufpe.br/wp-content/uploads/2024/02/cropped-selo_oficial_4-2.png" alt="Logo CIN" height="120px"/>
 </div>
 <h2 align="center">Banco de dados Orientado à chave Valor com Redis - exemplo pratico</h2>
 
@@ -101,17 +101,17 @@ $> poetry install
 ```
 - Pronto agora voce esta pronto para começar a usar!
 
-<!-- FIXME: erros no make -->
+
 ### Principais comandos:
 
-#### Levantar a Amostragem Exemplo
+#### Levantar a tela de comandos do redis com python
 ```
-$> make up
+$> make playground
 ```
 
-#### Levantar a API com um Exemplo Real
+#### Levantar a quizz com redis e python
 ```
-$> make start
+$> make quiz
 ```
 
 #### Adcionar novas dependencias
@@ -123,7 +123,7 @@ $> poetry add <<nome_da_lib>>
 $> poetry add <<nome_da_lib>> --group dev
 ```
 
-#### Utilizar Um gerenciador de desktop Redis [cliente GUI] Simples:
+#### Se preferir utilizar Um gerenciador de desktop Redis [cliente GUI] Simples:
 
 ```
 # Instalação Linux:
