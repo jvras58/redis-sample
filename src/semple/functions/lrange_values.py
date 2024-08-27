@@ -23,3 +23,8 @@ def lrange_values(lista, inicio, fim):
     """
     valores = redis_connect.lrange(lista, inicio, fim)
     return [v.decode('utf-8') for v in valores]
+
+'''
+Equivalente no cli: LRANGE <lista> <inicio> <fim>
+Exemplo: LRANGE minha_lista 0 2
+'''

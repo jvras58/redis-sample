@@ -22,3 +22,8 @@ def hset_value(hashname, campo, valor):
     """
     redis_connect.hset(hashname, campo, valor)
     st.success(f"Campo '{campo}' no hash '{hashname}' definido com valor '{valor}'.")
+
+'''
+Equivalente no cli: HSET <hashname> <campo> <valor>
+Exemplo: HSET meu_hash campo1 valor1
+'''

@@ -16,3 +16,9 @@ def get_value(chave):
     """
     valor = redis_connect.get(chave)
     return valor.decode('utf-8') if valor else None
+
+
+'''
+Equivalente no cli: GET <chave> 
+Exemplo: GET meu_valor
+'''

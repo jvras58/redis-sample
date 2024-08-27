@@ -19,3 +19,8 @@ def incr_value(chave):
     """
     valor = redis_connect.incr(chave)
     st.success(f"Valor da chave '{chave}' incrementado para {valor}.")
+
+'''
+Equivalente no cli: INCR <chave>
+Exemplo: INCR mychave
+'''

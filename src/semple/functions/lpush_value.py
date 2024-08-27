@@ -19,3 +19,8 @@ def lpush_value(lista, valor):
     """
     redis_connect.lpush(lista, valor)
     st.success(f"Valor '{valor}' adicionado à lista '{lista}'.")
+
+'''
+Equivalente no cli: LPUSH <lista> <valor>
+Exemplo: LPUSH mylist hello
+'''

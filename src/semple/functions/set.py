@@ -13,3 +13,9 @@ def set_value(chave, valor):
     """
     redis_connect.set(chave, valor)
     st.success(f"Chave '{chave}' definida com valor '{valor}'.")
+
+
+'''
+Equivalente no cli: SET <chave> <valor>
+Exemplo: SET meu_valor 123
+'''

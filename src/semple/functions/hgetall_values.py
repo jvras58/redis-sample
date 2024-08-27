@@ -21,3 +21,9 @@ def hgetall_values(hashname):
     """
     valores = redis_connect.hgetall(hashname)
     return {k.decode('utf-8'): v.decode('utf-8') for k, v in valores.items()}
+
+
+'''
+Equivalente no cli: HGETALL <hashname>
+Exemplo: HGETALL myhash
+'''
