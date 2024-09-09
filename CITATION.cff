@@ -1,0 +1,12 @@
+cff-version: 1.2.0
+message: "Se você usar este software, por favor cite-o conforme abaixo."
+authors:
+  - family-names: Silva
+    given-names: Jonathas
+    orcid: https://orcid.org/0000-0001-2345-6789
+title: "Banco de dados Orientado à chave Valor com Redis - exemplo prático"
+version: 1.0.0
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.1234567
+date-released: 2024-09-05
